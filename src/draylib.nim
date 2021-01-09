@@ -1,10 +1,14 @@
 import nimterop/[build, cimport]
+import os
 
-{.passl: "libraylibdll.a".}
+{.passl: "libraylibdll.a".} # TODO?
 
 type cuchar* = uint8 # mapping of more sane type # TODO?
-
-cImport("./raylib.h", recurse = false, flags = "--prefix:_ --typeMap:cint=int" ) # typeMap? TODO
+static:
+  cAddStdDir("c")
+  cAddSearchDir(currentSourcePath.parentDir())
+const pathHeader = cSearchPath("raylib.h")
+cImport(pathHeader, recurse = false, flags = "--prefix:_ --typeMap:cint=int" ) # typeMap? TODO
 
 
 proc `+`*(vecA, vecB: Vector2): Vector2 =
