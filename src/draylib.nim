@@ -3,12 +3,12 @@ import os
 
 {.passl: "libraylibdll.a".} # TODO?
 
-type cuchar* = uint8 # mapping of more sane type # TODO?
+type cuchar = uint8 # mapping of more sane type # TODO?
 static:
   cAddStdDir("c")
   cAddSearchDir(currentSourcePath.parentDir())
 const pathHeader = cSearchPath("raylib.h")
-cImport(pathHeader, recurse = false, flags = "--prefix:_ --typeMap:cint=int" ) # typeMap? TODO
+cImport(pathHeader, recurse = false, flags = "--prefix:_" ) # typeMap? TODO
 
 
 proc `+`*(vecA, vecB: Vector2): Vector2 =
